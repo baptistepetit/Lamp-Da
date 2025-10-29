@@ -446,10 +446,10 @@ build: has-lamp-type process $(BUILD_DIR)/properties-${LMBD_LAMP_TYPE}.txt
 
 format:
 	find $(PROJECT_INO) | xargs clang-format --style=file -i
-	find src/ -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' -o -iname '*.c' | xargs clang-format --style=file -i
+	find firmware/ -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' -o -iname '*.c' | xargs clang-format --style=file -i
 	find simulator/include simulator/src simulator/mocks -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' | xargs clang-format --style=file -i
 	(which dos2unix > /dev/null) && \
-		find src simulator -type f -regex '.*.[hc]p?p?' -exec dos2unix -q -e '{}' \; || echo "(dos2unix not found/failed)"
+		find firmware simulator -type f -regex '.*.[hc]p?p?' -exec dos2unix -q -e '{}' \; || echo "(dos2unix not found/failed)"
 
 format-hook:
 	cp .pre-commit .git/hooks/pre-commit
@@ -458,9 +458,9 @@ format-verify:
 	@which clang-format > /dev/null \
 		|| (echo; echo Install clang / clang-format to verify format!)
 	@find $(PROJECT_INO)| xargs clang-format --style=file --dry-run --Werror
-	@find src/ -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' -o -iname '*.c' | xargs clang-format --style=file --dry-run -Werror
+	@find firmware/ -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' -o -iname '*.c' | xargs clang-format --style=file --dry-run -Werror
 	@find simulator/ -iname '*.h' -o -iname '*.cpp' -o -iname '*.hpp' | xargs clang-format --style=file --dry-run -Werror
-	@if ! grep -IUr "$$(printf '\r')" src; then true; else echo 'You are using CRLF (\\r\\n) in a POSIX project :('; false; fi
+	@if ! grep -IUr "$$(printf '\r')" firmware; then true; else echo 'You are using CRLF (\\r\\n) in a POSIX project :('; false; fi
 	# format is ok :)
 
 #

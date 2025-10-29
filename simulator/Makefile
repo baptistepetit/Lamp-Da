@@ -32,7 +32,7 @@ check-dirs:
 		|| (echo; echo 'Bad path: SIMU_BUILD_DIR='$$SIMU_BUILD_DIR \
 			; echo 'Usage: SIMU_BUILD_DIR=../_build/simulator make' \
 			; echo; false)
-	@test -d '$(ROOT_DIR)/src/user' \
+	@test -d '$(ROOT_DIR)/firmware/src/user' \
 		|| (echo; echo 'Bad path: LMBD_ROOT_DIR='$$LMBD_ROOT_DIR \
 			; echo 'Usage: LMBD_ROOT_DIR=../../LampColorControler make' \
 			; echo; false)
